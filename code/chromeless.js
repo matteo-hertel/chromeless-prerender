@@ -1,21 +1,20 @@
 const { Chromeless } = require("chromeless");
 const chromeless = new Chromeless();
 
-async function fetchHTML() {
+async function fetchHTML(url) {
     let html = await chromeless
-        .goto('https://blog.matteohertel.com/post/featured-post')
+        .goto(url)
         .evaluate(() => {
-            function wait(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
             return wait(3000).then(() => {
                 return document.getElementsByTagName('html')[0].innerHTML;
             });
-
         })
-    return html;
     await chromeless.end();
+    return html;
 }
-fetchHTML()
+fetchHTML('https://blog.matteohertel.com/post/featured-post')
     .then(html => console.log(html))
-    .catch(console.error.bind(console));
+    // .then(chromeless.end())
+    .catch(err => {
+        console.error(err.stack);
+    });
