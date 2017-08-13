@@ -37,4 +37,14 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENTRYPOINT "/bin/bash"
+RUN npm install -g yarn
+RUN mkdir -p /var/node && mkdir -p /tmp/scripts
+ADD code/ /var/node/
+ADD config /tmp/scripts/
+WORKDIR /var/node
+RUN rm -rf node_modules
+RUN yarn
+RUN ls -la /tmp/scripts
+
+
+CMD "/tmp/scripts/start-chrome.sh && ls -la"

@@ -5,6 +5,9 @@ async function fetchHTML(url) {
     let html = await chromeless
         .goto(url)
         .evaluate(() => {
+            function wait(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
             return wait(3000)
                 .then(() => {
                     return document.getElementsByTagName('html')[0].innerHTML;
