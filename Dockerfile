@@ -44,7 +44,5 @@ ADD config /tmp/scripts/
 WORKDIR /var/node
 RUN rm -rf node_modules
 RUN yarn
-RUN ls -la /tmp/scripts
 
-
-CMD "/tmp/scripts/start-chrome.sh && ls -la"
+CMD "/tmp/scripts/entrypoint.sh"
