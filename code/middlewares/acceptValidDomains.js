@@ -1,5 +1,5 @@
 const url = require("url");
-const validDomains = ["matteohertel.com", "matteohertel.uk", "hertel.me.uk"];
+const validDomains = [...process.env.DOMAIN_WHITELIST.split(";"), "google.co.uk"];
 module.exports = (req, res, next) => {
     req.urlToFetch = req.query.url;
     let validateDomains = validDomains.filter((domain) => {

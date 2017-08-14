@@ -1,0 +1,14 @@
+version: "3"
+services:
+  chromeless-prerender:
+    build: ./
+    environment:
+      - APP_NAME=dev-chromeless-prerender
+      - NODE_ENV=development
+      - SERVER_PORT=3000
+      - LOGGING_TOKEN=
+      - LOGGING_HOST=
+      - RENDER_TIMEOUT=2000
+      - DOMAIN_WHITELIST=google.com;google.co.uk
+    ports:
+        - "3000:3000"
