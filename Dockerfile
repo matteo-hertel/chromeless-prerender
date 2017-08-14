@@ -1,5 +1,5 @@
 FROM debian:stable-slim
-
+MAINTAINER Matteo Hertel <info@matteohertel.com>
 # Install basic tools/utilities and google Chrome unstable (which has cross platform support for headless mode). Combining theem together so that apt cache cleanup would need to be done just once.
 RUN apt-get update -y && \
     apt-get install ca-certificates \
@@ -21,8 +21,9 @@ RUN apt-get update -y && \
       wget \
       curl \
       xz-utils -y --no-install-recommends \
-      lsb-release
-      
+      lsb-release \
+      supervisor
+RUN sed -i 's/^\(\[supervisord\]\)$/\1\nnodaemon=true/' /etc/supervisor/supervisord.conf
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 RUN dpkg -i google-chrome*.deb 
 RUN apt-get install -f
@@ -38,11 +39,15 @@ RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
 RUN npm install -g yarn
-RUN mkdir -p /var/node && mkdir -p /tmp/scripts
+RUN mkdir -p /var/node
+ADD config/supervisord /etc/supervisor
 ADD code/ /var/node/
-ADD config /tmp/scripts/
 WORKDIR /var/node
 RUN rm -rf node_modules
 RUN yarn
 
-CMD "/tmp/scripts/entrypoint.sh"
+# Define working directory.
+WORKDIR /etc/supervisor
+
+# Define default command.
+CMD ["supervisord", "-c", "/etc/supervisor/supervisord.conf"]
