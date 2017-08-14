@@ -4,8 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "chrome-launcher": "^0.4.0",
-    "chrome-remote-interface": "^0.24.3",
-    "chromeless": "^1.2.0"
+    "body-parser": "^1.17.2",
+    "chromeless": "^1.2.0",
+    "dotenv": "^4.0.0",
+    "epimetheus": "^1.0.54",
+    "express": "^4.15.4",
+    "helmet": "^3.8.1",
+    "morgan": "^1.8.2",
+    "prom-client": "^10.0.3",
+    "uuid": "^3.1.0",
+    "winston": "^2.3.1",
+    "winston-logzio": "^1.0.3"
+  },
+  "scripts": {
+    "dev": "nodemon index.js"
   }
 }

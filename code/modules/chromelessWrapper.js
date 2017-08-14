@@ -1,5 +1,5 @@
 const { Chromeless } = require("chromeless");
-const { wait } = require("./utils");
+
 async function fetchHTML(url) {
     const chromeless = new Chromeless();
     let html = await chromeless
@@ -8,7 +8,7 @@ async function fetchHTML(url) {
             function wait(ms) {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
-            return wait(3000)
+            return wait(2000)
                 .then(() => {
                     return document.getElementsByTagName('html')[0].innerHTML;
                 });
