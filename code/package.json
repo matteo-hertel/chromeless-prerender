@@ -10,6 +10,7 @@
     "epimetheus": "^1.0.54",
     "express": "^4.15.4",
     "helmet": "^3.8.1",
+    "memory-cache": "^0.2.0",
     "morgan": "^1.8.2",
     "prom-client": "^10.0.3",
     "uuid": "^3.1.0",
