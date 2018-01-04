@@ -31,7 +31,8 @@ RUN apt-get clean autoclean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* google-chrome-stable_current_amd64.deb
 
 # Install nodejs
-ENV NPM_CONFIG_LOGLEVEL=info NODE_VERSION=8.3.0
+ENV NPM_CONFIG_LOGLEVEL=info 
+ENV NODE_VERSION=8.9.3
 
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
   && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
